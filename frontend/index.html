@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/d1c2ea8b80.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="courses-bg-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="courses-heading">Manage My Courses</h1>
+                    <h1 class="create-course-heading">
+                        Create <span class="create-course-heading-subpart">Course</span>
+                    </h1>
+
+                    <input type="text" id="courseUserInput" class="course-user-input" placeholder="Enter course name" />
+                    <button class="button" id="addCourseButton">Add</button>
+                    <h1 class="course-items-heading">
+                        My <span class="course-items-heading-subpart">Courses</span>
+                    </h1>
+                    <ul class="course-items-container" id="courseItemsContainer"></ul>
+                    <button class="button" id="saveCourseButton">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

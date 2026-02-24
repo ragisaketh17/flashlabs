@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .main-heading {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container auth-container">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="errorMsg" style="color:red;"></p>
+
+    <p>Don't have an account? 
+      <a href="register.html">Register here</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        const text = await response.text();
+
+        if (text === "Invalid username" || text === "Invalid password") {
+            document.getElementById("errorMsg").innerText = text;
+        } else {
+            window.location.href = "/index.html";
+        }
+    });
+  </script>
+
+</body>
+</html>

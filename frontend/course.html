@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Notes</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #notesContainer { margin-top: 20px; }
+    .note { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+    textarea { width: 100%; height: 80px; margin-bottom: 10px; }
+    button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>Course Notes</h1>
+
+  <!-- Write Note Div -->
+  <div id="writeNote">
+    <textarea id="noteBody" placeholder="Write your note here..."></textarea>
+    <input type="text" id="noteTitle" placeholder="Title of the note" />
+    <br>
+    <button id="saveNoteBtn">Save Note</button>
+  </div>
+
+  <!-- Display Notes -->
+  <div id="notesContainer"></div>
+
+  <script>
+document.getElementById("saveNote").addEventListener("click", async () => {
+    const title = document.getElementById("noteTitle").value;
+    const body = document.getElementById("noteBody").value;
+
+    // Get courseId from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get("courseId");
+
+    if (!title || !body) {
+        alert("Both title and note are required");
+        return;
+    }
+
+    try {
+        const response = await fetch("/notes", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ title, body, courseId })
+        });
+
+        const result = await response.text();
+
+        alert(result); // Note added successfully
+        document.getElementById("noteTitle").value = "";
+        document.getElementById("noteBody").value = "";
+    } catch (error) {
+        alert("Error saving note: " + error.message);
+    }
+});
+</script>
+</body>
+</html>
